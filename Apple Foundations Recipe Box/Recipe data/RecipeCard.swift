@@ -4,18 +4,24 @@
 //
 //  Created by Michael Miller on 16/7/2026.
 //
-
+ 
 import SwiftUI
-
+ 
 struct RecipeCard: View {
+    
+    
+    
     var body: some View {
         VStack(spacing: 12) {
            
             
-            Image(systemName: "photo")
-                .font(.system(size: 60))
-                .foregroundColor(.gray)
-
+            Image("prawn")
+                .resizable()
+                .scaledToFit()
+                .frame(height: 140)
+                .clipped()
+                .cornerRadius(8)
+ 
             HStack {
                 Text("Card Title")
                     .font(.title2)
@@ -41,7 +47,7 @@ struct RecipeCard: View {
         .shadow(radius: 4)
     }
 }
-
+ 
 #Preview {
     RecipeCard()
 }
