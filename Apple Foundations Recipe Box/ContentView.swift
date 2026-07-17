@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView { // Allows tabs at the bottom to switch screens without switching 
-                // Tab 1 uses a NavigationStack for screen switching
+                // Tab uses a NavigationStack for screen switching
             NavigationStack {
                 BrowseView()
             }
