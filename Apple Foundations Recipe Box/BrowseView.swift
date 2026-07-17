@@ -13,9 +13,13 @@ struct BrowseView: View {
             Text("This is the browse screen.")
             
             // This button switches screens
+            /*
             NavigationLink("Go to Details", destination: MyRecipesView())
+             */
+            
+            
         }
-        .navigationTitle("Home")
+        .navigationTitle("Browse Recipes")
     }
 }
 

@@ -27,11 +27,12 @@ struct RecipeCard: View {
                 .buttonStyle(.borderedProminent)
             }
             
-
+            // Well probably get rid of it the description
+            /*
             Text("Description text goes here")
                 .font(.body)
                 .foregroundColor(.secondary)
-
+             */
             
         }
         .padding()
