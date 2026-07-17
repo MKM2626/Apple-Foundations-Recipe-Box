@@ -9,7 +9,35 @@ import SwiftUI
 
 struct RecipeCard: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing: 12) {
+           
+            
+            Image(systemName: "photo")
+                .font(.system(size: 60))
+                .foregroundColor(.gray)
+
+            HStack {
+                Text("Card Title")
+                    .font(.title2)
+                    .bold()
+                
+                Button("Action Button") {
+                    // Action will be added later
+                }
+                .buttonStyle(.borderedProminent)
+            }
+            
+
+            Text("Description text goes here")
+                .font(.body)
+                .foregroundColor(.secondary)
+
+            
+        }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(12)
+        .shadow(radius: 4)
     }
 }
 
