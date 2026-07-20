@@ -58,14 +58,14 @@ var myRecipeData = RecipeData()
 @Observable
 class TagData {
     var Tags = [
-        Tag(name: "Vegan"),
-        Tag(name: "Vegetarian"),
-        Tag(name: "Celiac"),
-        Tag(name: "Halal"),
-        Tag(name: "Keto"),
-        Tag(name: "Paleo"),
-        Tag(name: "Mediterranean"),
-        Tag(name: "High Protein")
+        Tag(name: "Vegan", taggedRecipes: [myRecipeData.recipes[0]]),
+        Tag(name: "Vegetarian", taggedRecipes: [myRecipeData.recipes[0]]),
+        Tag(name: "Celiac", taggedRecipes: [myRecipeData.recipes[0]]),
+        Tag(name: "Halal", taggedRecipes: [myRecipeData.recipes[0]]),
+        Tag(name: "Keto", taggedRecipes: [myRecipeData.recipes[0]]),
+        Tag(name: "Paleo", taggedRecipes: [myRecipeData.recipes[0]]),
+        Tag(name: "Mediterranean", taggedRecipes: [myRecipeData.recipes[0]]),
+        Tag(name: "High Protein", taggedRecipes: [myRecipeData.recipes[0]])
     ]
 }
 

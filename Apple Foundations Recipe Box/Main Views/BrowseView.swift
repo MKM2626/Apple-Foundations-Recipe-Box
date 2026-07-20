@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BrowseView: View {
     
-    @State private var searchText = ""
+    @State private var searchText = "" // Stores what user types into bar 
     
     @Binding var recipeData: RecipeData
     
@@ -18,16 +18,28 @@ struct BrowseView: View {
     ]
 
     // Search Function
+    // Creates a list of recipe indexes that match the search text.
+    // Instead of returning recipes directly, it returns their positions
     var filteredRecipeIndices: [Int] {
+        // Removes extra spaces before and after the search text.
         let trimmedSearchText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
 
+        // Show every recipe if the bar is empty
         if trimmedSearchText.isEmpty {
             return Array(recipeData.recipes.indices)
         }
 
+        // Search through every recipe index
         return recipeData.recipes.indices.filter { index in
+            // Gets the recipe at the current index.
             let recipe = recipeData.recipes[index]
 
+            // Return true if:
+            // 1. The recipe name contains the search text
+            // OR
+            // 2. Any ingredient contains the search text
+            //
+            // - ignores uppercase/lowercase differences
             return recipe.name.localizedCaseInsensitiveContains(trimmedSearchText) ||
             recipe.ingredients.contains { ingredient in
                 ingredient.localizedCaseInsensitiveContains(trimmedSearchText)
