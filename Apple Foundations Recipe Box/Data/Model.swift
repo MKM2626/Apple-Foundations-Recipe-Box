@@ -18,7 +18,7 @@ struct Recipe: Identifiable {
     var instructions: [String]
     var nutrition: [String]
     
-    var isSaved = false
+    var isSaved: Bool = false
 }
 
 struct Tag: Identifiable {

@@ -17,13 +17,31 @@ struct RecipeDetailView: View {
  
             VStack(alignment: .leading, spacing: 20) {
  
-                // Image
-                Image(recipe.imageName)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(height: 250)
-                    .frame(maxWidth: .infinity)
-                    .clipped()
+ 
+                // Image + Favorite Button
+                ZStack(alignment: .topTrailing) {
+ 
+                    Image(recipe.imageName)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(height: 250)
+                        .frame(maxWidth: .infinity)
+                        .clipped()
+ 
+ 
+                    Button {
+                        recipe.isSaved.toggle()
+ 
+                    } label: {
+                        Image(systemName: recipe.isSaved ? "heart.fill" : "heart")
+                            .font(.title)
+                            .foregroundStyle(recipe.isSaved ? .red : .white)
+                            .padding()
+                            .background(.black.opacity(0.5))
+                            .clipShape(Circle())
+                    }
+                    .padding()
+                }
  
                 // Recipe Name
                 Text(recipe.name)
@@ -118,28 +136,15 @@ struct RecipeDetailView: View {
         .navigationTitle("Recipe")
         .navigationBarTitleDisplayMode(.inline)
  
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
- 
-                Button {
-                    recipe.isSaved.toggle()
- 
-                } label: {
-                    Image(systemName: recipe.isSaved ? "heart.fill" : "heart")
-                        .foregroundStyle(recipe.isSaved ? .red : .gray)
-                }
- 
-            }
- 
-        }
- 
+        
     }
 }
  
 #Preview {
  
     @Previewable @State var recipe = myRecipeData.recipes[0]
-
-        RecipeDetailView(recipe: $recipe)
  
+    NavigationStack {
+        RecipeDetailView(recipe: $recipe)
+    }
 }

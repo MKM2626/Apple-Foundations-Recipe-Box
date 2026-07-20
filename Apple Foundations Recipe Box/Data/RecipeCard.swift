@@ -1,42 +1,31 @@
-//
-//  RecipeCard.swift
-//  Apple Foundations Recipe Box
-//
-//  Created by Michael Miller on 16/7/2026.
-//
- 
 import SwiftUI
  
 struct RecipeCard: View {
-    
+    @Binding var recipe: Recipe
+    //@State private var isSaved = false
+ 
     var body: some View {
         VStack(spacing: 12) {
-            
-            Image("prawn")
+            Image(recipe.imageName)
                 .resizable()
-                .scaledToFit()
-                .frame(height: 140)
-                .clipped()
-                .cornerRadius(8)
+                .aspectRatio(contentMode: .fill)
+                .frame(height: 100)
+                .frame(maxWidth: 140)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
  
             HStack {
-                Text("Card Title")
+                Text(recipe.name)
                     .font(.title2)
                     .bold()
-                
-                Button("Action Button") {
-                    // Action will be added later
+ 
+                Button {
+                    //isSaved.toggle()
+                    recipe.isSaved.toggle()
+                } label: {
+                    Image(systemName: recipe.isSaved ? "heart.fill" : "heart")
+                        .foregroundColor(recipe.isSaved ? .red : .gray)
                 }
-                .buttonStyle(.borderedProminent)
             }
-            
-            // Well probably get rid of it the description
-            /*
-            Text("Description text goes here")
-                .font(.body)
-                .foregroundColor(.secondary)
-             */
-            
         }
         .padding()
         .background(Color.white)
@@ -46,5 +35,7 @@ struct RecipeCard: View {
 }
  
 #Preview {
-    RecipeCard()
+    @Previewable @State var recipe = myRecipeData.recipes[0]
+
+        RecipeCard(recipe: $recipe)
 }

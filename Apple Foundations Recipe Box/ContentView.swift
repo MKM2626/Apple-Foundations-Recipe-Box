@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var recipeData = myRecipeData
+    
     var body: some View {
         TabView { // Allows tabs at the bottom to switch screens without switching 
                 // Tab 1 uses a NavigationStack for screen switching
             NavigationStack {
-                BrowseView()
+                BrowseView(recipeData: $recipeData)
             }
             .tabItem {
                 Label("Browse", systemImage: "network")

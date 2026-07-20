@@ -4,57 +4,63 @@
 //
 //  Created by Michael Miller on 16/7/2026.
 //
-
+ 
 import SwiftUI
-
+ 
 struct BrowseView: View {
-    let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible())
+    
+    @State private var searchText = ""
+    
+    @Binding var recipeData: RecipeData
+    
+    private let columns = [
+        GridItem(.adaptive(minimum: 140), spacing: 16)
     ]
     
-    var recipeData = myRecipeData
+    var filteredRecipeIndices: [Recipe.ID] {
+        let trimmedSearchText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if trimmedSearchText.isEmpty {
+            return recipeData.recipes.map(\.id)
+        }
+
+        return recipeData.recipes
+            .filter { recipe in
+                recipe.name.localizedCaseInsensitiveContains(trimmedSearchText) ||
+                recipe.ingredients.contains { ingredient in
+                    ingredient.localizedCaseInsensitiveContains(trimmedSearchText)
+                }
+            }
+            .map(\.id)
+    }
     
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 16) {
-                
-                ForEach(recipeData.recipes) {
-                    recipe in
+                ForEach(filteredRecipeIndices, id: \.self) { id in
                     
-                    VStack(spacing: 8) {
-                        VStack(spacing: 12) {
-                           
-                            
-                            Image(systemName: "photo")
-                                .font(.system(size: 60))
-                                .foregroundColor(.gray)
-
-                            HStack {
-                                Text(recipe.name)
-                                    .font(.title2)
-                                    .bold()
-                                
-                                Button("Action Button") {
-                                    // Action will be added later
-                                }
-                                .buttonStyle(.borderedProminent)
-                            }
-                        }
-                        .padding()
-                        .background(Color.white)
-                        .cornerRadius(12)
-                        .shadow(radius: 4)
+                    if let index = recipeData.recipes.firstIndex(where: { $0.id == id }) {
+                        RecipeCard(recipe: $recipeData.recipes[index])
                     }
                 }
-                
-                
             }
             .padding()
         }
+        .navigationTitle("Browse Recipes")
+        .searchable(
+            text: $searchText,
+            placement: .navigationBarDrawer(displayMode: .always),
+            prompt: "Search Recipes"
+        )
     }
 }
-
+ 
 #Preview {
-    BrowseView()
+    /*NavigationStack{
+        BrowseView()
+    }*/
+    
+    @Previewable @State var recipeData = myRecipeData
+
+       BrowseView(recipeData: $recipeData)
 }
