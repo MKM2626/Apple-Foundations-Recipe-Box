@@ -9,11 +9,8 @@ import SwiftUI
  
 struct RecipeCard: View {
     
-    
-    
     var body: some View {
         VStack(spacing: 12) {
-           
             
             Image("prawn")
                 .resizable()

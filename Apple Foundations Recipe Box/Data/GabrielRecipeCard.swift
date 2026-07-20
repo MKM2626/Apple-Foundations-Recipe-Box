@@ -1,12 +1,12 @@
 import SwiftUI
  
-struct RecipeCard: View {
-    var recipe: Recipe
-    @State private var isSaved = false
+struct GabrielRecipeCard: View {
+    @Binding var recipe: Recipe
+    //@State private var isSaved = false
  
     var body: some View {
         VStack(spacing: 12) {
-            Image("prawn")
+            Image(recipe.imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(height: 100)
@@ -19,10 +19,11 @@ struct RecipeCard: View {
                     .bold()
  
                 Button {
-                    isSaved.toggle()
+                    //isSaved.toggle()
+                    recipe.isSaved.toggle()
                 } label: {
-                    Image(systemName: isSaved ? "heart.fill" : "heart")
-                        .foregroundColor(isSaved ? .red : .gray)
+                    Image(systemName: recipe.isSaved ? "heart.fill" : "heart")
+                        .foregroundColor(recipe.isSaved ? .red : .gray)
                 }
             }
         }
@@ -34,5 +35,7 @@ struct RecipeCard: View {
 }
  
 #Preview {
-    RecipeCard(recipe: myRecipeData.recipes[0])
+    @Previewable @State var recipe = myRecipeData.recipes[0]
+
+        GabrielRecipeCard(recipe: $recipe)
 }

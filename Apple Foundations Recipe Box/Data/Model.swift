@@ -9,7 +9,7 @@ import Foundation
 
 struct Recipe: Identifiable {
     var id = UUID()
-    //var imageName: String
+    var imageName: String
     var name: String
     var prepTime: Int
     var cookTime: Int
@@ -18,7 +18,11 @@ struct Recipe: Identifiable {
     var instructions: [String]
     var nutrition: [String]
     
-    var isSaved: Bool = false
-    
-    
+    var isSaved = false
+}
+
+struct Tag: Identifiable {
+    var id = UUID()
+    var name: String
+    //var listOfRecipes: [Recipe]
 }
