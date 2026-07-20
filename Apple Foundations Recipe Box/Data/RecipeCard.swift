@@ -29,6 +29,7 @@ struct RecipeCard: View {
             }
         }
         .padding()
+        .frame(width: 180, height: 180) // Fixed card size
         .background(Color.white)
         .cornerRadius(12)
         .shadow(radius: 4)
