@@ -4,9 +4,9 @@
 //
 //  Created by Michael Miller on 16/7/2026.
 //
- 
+
 import SwiftUI
- 
+
 struct BrowseView: View {
     
     @State private var searchText = ""
@@ -16,51 +16,50 @@ struct BrowseView: View {
     private let columns = [
         GridItem(.adaptive(minimum: 140), spacing: 16)
     ]
-    
-    var filteredRecipeIndices: [Recipe.ID] {
+
+    // Search Function
+    var filteredRecipeIndices: [Int] {
         let trimmedSearchText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
 
         if trimmedSearchText.isEmpty {
-            return recipeData.recipes.map(\.id)
+            return Array(recipeData.recipes.indices)
         }
 
-        return recipeData.recipes
-            .filter { recipe in
-                recipe.name.localizedCaseInsensitiveContains(trimmedSearchText) ||
-                recipe.ingredients.contains { ingredient in
-                    ingredient.localizedCaseInsensitiveContains(trimmedSearchText)
-                }
+        return recipeData.recipes.indices.filter { index in
+            let recipe = recipeData.recipes[index]
+
+            return recipe.name.localizedCaseInsensitiveContains(trimmedSearchText) ||
+            recipe.ingredients.contains { ingredient in
+                ingredient.localizedCaseInsensitiveContains(trimmedSearchText)
             }
-            .map(\.id)
+        }
     }
     
+    // View
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: columns, spacing: 16) {
-                ForEach(filteredRecipeIndices, id: \.self) { id in
-                    
-                    if let index = recipeData.recipes.firstIndex(where: { $0.id == id }) {
-                        RecipeCard(recipe: $recipeData.recipes[index])
+        NavigationStack {
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: 16) {
+                    ForEach(filteredRecipeIndices, id: \.self) { index in
+                        NavigationLink(destination: RecipeDetailView(recipe: $recipeData.recipes[index])) {
+                            RecipeCard(recipe: $recipeData.recipes[index])
+                        }
                     }
                 }
+                .padding()
             }
-            .padding()
+            .navigationTitle("Browse Recipes")
+            .searchable(
+                text: $searchText,
+                placement: .navigationBarDrawer(displayMode: .always),
+                prompt: "Search Recipes"
+            )
         }
-        .navigationTitle("Browse Recipes")
-        .searchable(
-            text: $searchText,
-            placement: .navigationBarDrawer(displayMode: .always),
-            prompt: "Search Recipes"
-        )
     }
 }
- 
+
 #Preview {
-    /*NavigationStack{
-        BrowseView()
-    }*/
-    
     @Previewable @State var recipeData = myRecipeData
 
-       BrowseView(recipeData: $recipeData)
+    BrowseView(recipeData: $recipeData)
 }

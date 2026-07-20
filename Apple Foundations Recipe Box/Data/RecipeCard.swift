@@ -17,6 +17,7 @@ struct RecipeCard: View {
                 Text(recipe.name)
                     .font(.title2)
                     .bold()
+                    .foregroundColor(.black)
  
                 Button {
                     //isSaved.toggle()
