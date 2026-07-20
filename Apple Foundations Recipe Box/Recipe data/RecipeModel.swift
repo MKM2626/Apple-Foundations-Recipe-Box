@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftUI
 
 struct Recipe: Identifiable {
     var id = UUID()
