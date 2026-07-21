@@ -19,10 +19,10 @@ struct Recipe: Identifiable {
     var nutrition: [String]
     
     var isSaved: Bool = false
+    var tags: [Tag] = []
 }
 
 struct Tag: Identifiable {
     var id = UUID()
     var name: String
-    var taggedRecipes: [Recipe]
 }
