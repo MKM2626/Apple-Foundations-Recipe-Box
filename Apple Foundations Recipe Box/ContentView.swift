@@ -22,7 +22,7 @@ struct ContentView: View {
             }
 
             NavigationStack {
-                MyRecipesView(recipeData: $recipeData)
+                MyRecipesView(recipeData: $recipeData, tagData: $tagData)
             }
             .tabItem {
                 Label("My Recipes", systemImage: "menucard.fill")

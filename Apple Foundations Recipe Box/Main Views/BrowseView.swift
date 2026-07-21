@@ -68,7 +68,7 @@ struct BrowseView: View {
     // View
     var body: some View {
         NavigationStack {
-            VStack {
+            ScrollView {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         ForEach(tagSuggestion) { tag in
@@ -99,24 +99,23 @@ struct BrowseView: View {
                     .padding(.horizontal)
                 }
                 
-                ScrollView {
-                    LazyVGrid(columns: columns, spacing: 16) {
-                        ForEach(filteredRecipeIndices, id: \.self) { index in
-                            NavigationLink(destination: RecipeDetailView(recipe: $recipeData.recipes[index])) {
-                                RecipeCard(recipe: $recipeData.recipes[index])
-                            }
+                LazyVGrid(columns: columns, spacing: 16) {
+                    ForEach(filteredRecipeIndices, id: \.self) { index in
+                        NavigationLink(destination: RecipeDetailView(recipe: $recipeData.recipes[index])) {
+                            RecipeCard(recipe: $recipeData.recipes[index])
                         }
                     }
-                    .padding()
                 }
-                .navigationTitle("Browse Recipes")
-                .searchable(
-                    text: $searchText,
-                    placement: .navigationBarDrawer(displayMode: .always),
-                    prompt: "Search Recipes"
-                )
-                
+                .padding()
             }
+            .navigationTitle("Browse Recipes")
+            .searchable(
+                text: $searchText,
+                placement: .navigationBarDrawer(displayMode: .always),
+                prompt: "Search Recipes"
+            )
+                
+            
         }
     }
     

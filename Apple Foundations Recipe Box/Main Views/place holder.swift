@@ -1,13 +1,14 @@
+
 //
-//  MyRecipesView.swift
+//  Untitled.swift
 //  Apple Foundations Recipe Box
 //
-//  Created by Michael Miller on 16/7/2026.
+//  Created by Michael Miller on 21/7/2026.
 //
 
 import SwiftUI
 
-struct MyRecipesView: View {
+struct ViewMode: View {
     
     @State private var searchText = "" // Stores what user types into bar
     @State private var selectedTags: [Tag] = []
@@ -120,11 +121,13 @@ struct MyRecipesView: View {
             
         }
     }
+    
 }
 
 #Preview {
     @Previewable @State var recipeData = myRecipeData
     @Previewable @State var tagData = myTagData
 
-    MyRecipesView(recipeData: $recipeData, tagData: $tagData)
+    ViewMode(recipeData: $recipeData, tagData: $tagData)
 }
+
