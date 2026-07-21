@@ -1,10 +1,13 @@
 
 import SwiftUI
+import PhotosUI
  
 struct AddRecipeView: View {
     @Environment(\.dismiss) var dismiss
- 
-    @State private var imageName: String = "prawn"
+    
+    @State private var selectedPhoto: PhotosPickerItem?
+    @State private var selectedImageData: Data?
+    
     @State private var name: String = ""
     @State private var prepTime: Int = 0
     @State private var cookTime: Int = 0
@@ -18,27 +21,47 @@ struct AddRecipeView: View {
     
     // Updated to hold the actual Tag objects
     @State private var selectedTags: [Tag] = []
+    
+    @Binding var recipeData: RecipeData
+    @Binding var tagData: TagData
  
     var body: some View {
         NavigationStack {
             Form {
                 Section("RECIPE DETAILS") {
                     TextField("Recipe Name", text: $name)
-                    Image(imageName)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(height: 160)
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
                     
-                    Menu {
-                        // Optional: Logic to change image could go here
-                    } label: {
-                        HStack {
-                            Text("Image")
-                            Spacer()
-                            Text(imageName.replacingOccurrences(of: "_", with: " ").capitalized)
+                    
+                    // Photo Picker
+                    PhotosPicker(
+                        selection: $selectedPhoto,
+                        matching: .images,
+                        photoLibrary: .shared()
+                    ) {
+                        Label(
+                            selectedImageData == nil ? "Choose Recipe Photo" : "Change Photo",
+                            systemImage: "photo"
+                        )
+                    }
+
+                    .onChange(of: selectedPhoto) { _, newPhoto in
+                        Task {
+                            if let data = try? await newPhoto?.loadTransferable(type: Data.self) {
+                                selectedImageData = data
+                            }
                         }
                     }
+
+                    if let imageData = selectedImageData,
+                       let uiImage = UIImage(data: imageData) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 200)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    }
+                   
+                    
                 }
                 
                 Section("Time and Servings") {
@@ -90,7 +113,7 @@ struct AddRecipeView: View {
  
                 Section("Tags") {
                     Menu(selectedTags.isEmpty ? "Choose Tags" : "\(selectedTags.count) Selected") {
-                        ForEach(myTagData.Tags) { tag in
+                        ForEach(tagData.Tags) { tag in
                             Button {
                                 // Toggle selection: if already in list, remove it. Otherwise, add it.
                                 if let index = selectedTags.firstIndex(where: { $0.id == tag.id }) {
@@ -129,7 +152,8 @@ struct AddRecipeView: View {
                     Button("Save") {
                         // 1. Create the new recipe object
                         let newRecipe = Recipe(
-                            imageName: imageName,
+                            imageName: "",
+                            imageData: selectedImageData,
                             name: name,
                             prepTime: prepTime,
                             cookTime: cookTime,
@@ -137,12 +161,11 @@ struct AddRecipeView: View {
                             ingredients: ingredients,
                             instructions: instructions,
                             nutrition: nutrition,
-                            isSaved: false,
-                            tags: selectedTags // Pass the selected tags here
+                            isSaved: true,
+                            tags: selectedTags
                         )
-                        
-                        // 2. Add to your global database list
-                        myRecipeData.recipes.append(newRecipe)
+
+                        recipeData.recipes.append(newRecipe)
                         
                         dismiss()
                     }
@@ -154,5 +177,8 @@ struct AddRecipeView: View {
 }
  
 #Preview {
-    AddRecipeView()
+    @Previewable @State var recipeData = myRecipeData
+    @Previewable @State var tagData = myTagData
+
+    AddRecipeView(recipeData: $recipeData, tagData: $tagData)
 }

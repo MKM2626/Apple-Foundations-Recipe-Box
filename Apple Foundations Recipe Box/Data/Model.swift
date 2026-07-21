@@ -9,7 +9,11 @@ import Foundation
 
 struct Recipe: Identifiable {
     var id = UUID()
+    
     var imageName: String
+    
+    var imageData: Data? = nil
+    
     var name: String
     var prepTime: Int
     var cookTime: Int

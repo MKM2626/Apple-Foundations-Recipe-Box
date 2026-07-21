@@ -28,7 +28,7 @@ struct LaunchView: View {
         
         if showContentView {
             
-            ContentView()
+            OnBoardingTest()
             
         } else {
             

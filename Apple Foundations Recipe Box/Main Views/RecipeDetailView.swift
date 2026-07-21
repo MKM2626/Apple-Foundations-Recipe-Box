@@ -18,13 +18,21 @@ struct RecipeDetailView: View {
             VStack(alignment: .leading, spacing: 20) {
                 
                 
-                // Image + Favorite Button
-                Image(recipe.imageName)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(height: 250)
-                    .frame(maxWidth: .infinity)
-                    .clipped()
+                // Image
+                Group {
+                    if let imageData = recipe.imageData,
+                       let uiImage = UIImage(data: imageData) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                    } else {
+                        Image(recipe.imageName)
+                            .resizable()
+                    }
+                }
+                .scaledToFit()
+                .frame(height: 300)
+                .frame(maxWidth: .infinity)
+                .clipped()
                 
                 
                 // Recipe Name

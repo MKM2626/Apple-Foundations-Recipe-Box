@@ -103,7 +103,7 @@ struct MyRecipesView: View {
                 
                 LazyVGrid(columns: columns, spacing: 16) {
                     ForEach(filteredRecipeIndices, id: \.self) { index in
-                        NavigationLink(destination: RecipeDetailView(recipe: $recipeData.recipes[index])) {
+                        NavigationLink(destination: RecipeDetailViewTest(recipe: $recipeData.recipes[index])) {
                             RecipeCard(recipe: $recipeData.recipes[index])
                         }
                     }
