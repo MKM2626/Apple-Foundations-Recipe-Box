@@ -59,6 +59,8 @@ struct GroceryListPreview: View {
                                     Text(item)
                                 }
                             }
+                            Spacer()
+                            Divider()
                         }
                         .padding()
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -71,7 +73,7 @@ struct GroceryListPreview: View {
                 .padding()
             }
             
-            ComingSoonOverlay()
+
         }
     }
 }

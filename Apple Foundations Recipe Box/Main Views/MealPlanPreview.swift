@@ -38,6 +38,7 @@ struct MealPlanPreviewView: View {
                         Image(systemName: "plus.circle.fill")
                             .font(.title)
                     }
+                    
                 }
                 
                 ForEach(days, id: \.0) { day, meal in
@@ -51,17 +52,21 @@ struct MealPlanPreviewView: View {
                             .foregroundStyle(.secondary)
                         
                         Spacer()
+                        
                     }
                     .padding()
                     .background(.white)
                     .clipShape(
                         RoundedRectangle(cornerRadius: 12)
+                    
                     )
+                    Divider()
                 }
+                
             }
             .padding()
             
-            ComingSoonOverlay()
+         
         }
     }
 }
