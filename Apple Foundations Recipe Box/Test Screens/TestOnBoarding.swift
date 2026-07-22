@@ -34,6 +34,12 @@ struct OnBoardingTest: View {
         ),
         
         Feature(
+            image: "plus.app",
+            title: "Create Recipes",
+            description: "Add your own recipes and keep them organized for easy access."
+        ),
+        
+        Feature(
             image: "sparkles",
             title: "Coming Soon",
             description: "More exciting features are coming soon."

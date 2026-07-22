@@ -11,6 +11,12 @@ struct RecipeDetailViewTest: View {
     
     @Binding var recipe: Recipe
     
+    let appGreen = Color(
+        red: 0.05,
+        green: 0.56,
+        blue: 0.25
+    )
+    
     var body: some View {
         
         ScrollView {
@@ -74,7 +80,7 @@ struct RecipeDetailViewTest: View {
                                         .font(.caption)
                                         .padding(.horizontal, 12)
                                         .padding(.vertical, 6)
-                                        .background(Color.orange.opacity(0.2))
+                                        .background(appGreen.opacity(0.2))
                                         .clipShape(Capsule())
                                 }
                             }
@@ -92,7 +98,7 @@ struct RecipeDetailViewTest: View {
                             HStack(alignment: .top) {
                                 Text("\(index + 1)")
                                     .fontWeight(.bold)
-                                    .foregroundColor(.orange)
+                                    .foregroundColor(appGreen)
                                 
                                 Text(recipe.instructions[index])
                             }
@@ -136,10 +142,16 @@ struct InfoCard: View {
     let value: String
     let icon: String
     
+    let appGreen = Color(
+        red: 0.05,
+        green: 0.56,
+        blue: 0.25
+    )
+    
     var body: some View {
         VStack(spacing: 6) {
             Image(systemName: icon)
-                .foregroundColor(.orange)
+                .foregroundColor(appGreen)
             
             Text(value)
                 .font(.headline)

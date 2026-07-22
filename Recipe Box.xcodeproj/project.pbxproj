@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		7A9379843008A6BA00D80B0C /* Apple Foundations Recipe Box.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Apple Foundations Recipe Box.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A9379843008A6BA00D80B0C /* Recipe Box.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Recipe Box.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -40,7 +40,7 @@
 		7A9379853008A6BA00D80B0C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7A9379843008A6BA00D80B0C /* Apple Foundations Recipe Box.app */,
+				7A9379843008A6BA00D80B0C /* Recipe Box.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +48,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7A9379833008A6BA00D80B0C /* Apple Foundations Recipe Box */ = {
+		7A9379833008A6BA00D80B0C /* Recipe Box */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7A93798F3008A6BB00D80B0C /* Build configuration list for PBXNativeTarget "Apple Foundations Recipe Box" */;
+			buildConfigurationList = 7A93798F3008A6BB00D80B0C /* Build configuration list for PBXNativeTarget "Recipe Box" */;
 			buildPhases = (
 				7A9379803008A6BA00D80B0C /* Sources */,
 				7A9379813008A6BA00D80B0C /* Frameworks */,
@@ -63,11 +63,11 @@
 			fileSystemSynchronizedGroups = (
 				7A9379863008A6BA00D80B0C /* Apple Foundations Recipe Box */,
 			);
-			name = "Apple Foundations Recipe Box";
+			name = "Recipe Box";
 			packageProductDependencies = (
 			);
 			productName = "Apple Foundations Recipe Box";
-			productReference = 7A9379843008A6BA00D80B0C /* Apple Foundations Recipe Box.app */;
+			productReference = 7A9379843008A6BA00D80B0C /* Recipe Box.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -85,7 +85,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 7A93797F3008A6BA00D80B0C /* Build configuration list for PBXProject "Apple Foundations Recipe Box" */;
+			buildConfigurationList = 7A93797F3008A6BA00D80B0C /* Build configuration list for PBXProject "Recipe Box" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -99,7 +99,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7A9379833008A6BA00D80B0C /* Apple Foundations Recipe Box */,
+				7A9379833008A6BA00D80B0C /* Recipe Box */,
 			);
 		};
 /* End PBXProject section */
@@ -315,7 +315,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7A93797F3008A6BA00D80B0C /* Build configuration list for PBXProject "Apple Foundations Recipe Box" */ = {
+		7A93797F3008A6BA00D80B0C /* Build configuration list for PBXProject "Recipe Box" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7A93798D3008A6BB00D80B0C /* Debug */,
@@ -324,7 +324,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7A93798F3008A6BB00D80B0C /* Build configuration list for PBXNativeTarget "Apple Foundations Recipe Box" */ = {
+		7A93798F3008A6BB00D80B0C /* Build configuration list for PBXNativeTarget "Recipe Box" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7A9379903008A6BB00D80B0C /* Debug */,

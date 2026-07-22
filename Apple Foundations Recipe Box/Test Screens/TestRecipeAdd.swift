@@ -13,6 +13,12 @@ struct AddRecipeViewTest: View {
     
     @FocusState private var isTextFieldFocused: Bool
     
+    let appGreen = Color(
+        red: 0.05,
+        green: 0.56,
+        blue: 0.25
+    )
+    
     @State private var selectedPhoto: PhotosPickerItem?
     @State private var selectedImageData: Data?
     
@@ -129,7 +135,7 @@ struct AddRecipeViewTest: View {
                                 newIngredient = ""
                             } label: {
                                 Image(systemName: "plus.circle.fill")
-                                    .foregroundColor(.orange)
+                                    .foregroundColor(appGreen)
                             }
                             .disabled(newIngredient.isEmpty)
                         }
@@ -172,7 +178,7 @@ struct AddRecipeViewTest: View {
                                 newInstruction = ""
                             } label: {
                                 Image(systemName: "plus.circle.fill")
-                                    .foregroundColor(.orange)
+                                    .foregroundColor(appGreen)
                             }
                             .disabled(newInstruction.isEmpty)
                         }
