@@ -19,6 +19,11 @@ struct MealPlanPreviewView: View {
         ("Sunday", "Roast Dinner")
     ]
     
+    let appGreen = Color(
+        red: 0.05,
+        green: 0.56,
+        blue: 0.25
+    )
     
     var body: some View {
         ZStack {
@@ -37,6 +42,7 @@ struct MealPlanPreviewView: View {
                     } label: {
                         Image(systemName: "plus.circle.fill")
                             .font(.title)
+                            .foregroundStyle(appGreen)
                     }
                     
                 }
