@@ -11,7 +11,7 @@ import SwiftUI
 struct Apple_Foundations_Recipe_BoxApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LaunchView()
         }
     }
 }

@@ -11,6 +11,8 @@ import PhotosUI
 struct AddRecipeViewTest: View {
     @Environment(\.dismiss) var dismiss
     
+    @FocusState private var isTextFieldFocused: Bool
+    
     @State private var selectedPhoto: PhotosPickerItem?
     @State private var selectedImageData: Data?
     
@@ -85,14 +87,18 @@ struct AddRecipeViewTest: View {
                     Card {
                         TextField("Recipe Name", text: $name)
                             .font(.title3)
+                            .focused($isTextFieldFocused)
                     }
                     
                     
                     // Time Cards
                     HStack(spacing: 12) {
                         TimeBox(title: "Prep", value: $prepTime)
+                            .focused($isTextFieldFocused)
                         TimeBox(title: "Cook", value: $cookTime)
+                            .focused($isTextFieldFocused)
                         TimeBox(title: "Serves", value: $servingSize)
+                            .focused($isTextFieldFocused)
                     }
                     
                     
@@ -116,6 +122,7 @@ struct AddRecipeViewTest: View {
                         
                         HStack {
                             TextField("Add ingredient", text: $newIngredient)
+                                .focused($isTextFieldFocused)
                             
                             Button {
                                 ingredients.append(newIngredient)
@@ -158,6 +165,7 @@ struct AddRecipeViewTest: View {
                                 text: $newInstruction,
                                 axis: .vertical
                             )
+                            .focused($isTextFieldFocused)
                             
                             Button {
                                 instructions.append(newInstruction)
@@ -222,12 +230,17 @@ struct AddRecipeViewTest: View {
                     }
                 }
                 .padding()
+                .onTapGesture {
+                            isTextFieldFocused = false
+                        }
+                
             }
             .background(Color(.systemGroupedBackground))
             .navigationTitle("New Recipe")
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Cancel") {
+                        isTextFieldFocused = false
                         dismiss()
                     }
                 }
@@ -249,6 +262,27 @@ struct AddRecipeViewTest: View {
                         )
                         
                         recipeData.recipes.append(newRecipe)
+                        
+                        // Clear entry
+                        selectedPhoto = nil
+                        selectedImageData = nil
+
+                        name = ""
+                        prepTime = 0
+                        cookTime = 0
+                        servingSize = 0
+
+                        ingredients.removeAll()
+                        newIngredient = ""
+
+                        instructions.removeAll()
+                        newInstruction = ""
+
+                        nutrition.removeAll()
+                        newNutrition = ""
+
+                        selectedTags.removeAll()
+                        
                         dismiss()
                     }
                     .disabled(name.isEmpty)
@@ -288,6 +322,7 @@ struct TimeBox: View {
             TextField("0", value: $value, format: .number)
                 .multilineTextAlignment(.center)
                 .keyboardType(.numberPad)
+                
         }
         .frame(maxWidth: .infinity)
         .padding()

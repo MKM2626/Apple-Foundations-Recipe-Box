@@ -60,77 +60,98 @@ struct OnBoardingTest: View {
             
         } else {
             
-            ZStack {
-                
-                appGreen.opacity(0.08)
-                    .ignoresSafeArea()
+            NavigationStack {
                 
                 
-                VStack {
+                ZStack {
+                    
+                    appGreen.opacity(0.08)
+                        .ignoresSafeArea()
                     
                     
-                    ScrollView(.horizontal) {
-
-                        HStack() {
-
-                            ForEach(Array(features.enumerated()), id: \.offset) { index, feature in
+                    VStack {
+                        
+                        ScrollView(.horizontal) {
+                            
+                            HStack() {
                                 
-                                FeatureCardTest(
-                                    feature: feature,
-                                    appGreen: appGreen
-                                )
-                                .containerRelativeFrame(.horizontal)
-                                .scrollTransition(.interactive, axis: .horizontal) { view, phase in
+                                ForEach(Array(features.enumerated()), id: \.offset) { index, feature in
                                     
-                                    view
-                                        .scaleEffect(phase.isIdentity ? 1 : 0.88)
-                                        .opacity(1 - abs(phase.value) * 0.4)
+                                    FeatureCardTest(
+                                        feature: feature,
+                                        appGreen: appGreen
+                                    )
+                                    .containerRelativeFrame(.horizontal)
+                                    .scrollTransition(.interactive, axis: .horizontal) { view, phase in
+                                        
+                                        view
+                                            .scaleEffect(phase.isIdentity ? 1 : 0.88)
+                                            .opacity(1 - abs(phase.value) * 0.4)
+                                    }
+                                    .id(index)
                                 }
-                                .id(index)
+                            }
+                            .scrollTargetLayout()
+                        }
+                        .contentMargins(.horizontal, 20)
+                        .contentMargins(.vertical, 40)
+                        .scrollTargetBehavior(.paging)
+                        .scrollIndicators(.hidden)
+                        .scrollPosition(id: $scrollPosition)
+                        .onChange(of: scrollPosition) { _, newValue in
+                            if let newValue {
+                                currentIndex = newValue
+                            }
+                            
+                        }
+                        
+                        Spacer()
+                        
+                        if currentIndex == features.count - 1 {
+                            
+                            Button {
+                                goToContent = true
+                            } label: {
+                                Text("GET STARTED")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                                    .frame(width: 220, height: 50)
+                                    .background(appGreen)
+                                    .clipShape(Capsule())
+                                
+                            }
+                            .padding(.bottom, 30)
+                            
+                        } else {
+                            
+                            Text("Swipe to explore")
+                                .font(.title2)
+                                .foregroundStyle(.secondary)
+                            
+                        }
+                        
+                        Spacer()
+                        
+                        
+                    }
+                    .toolbar {
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button(action: {
+                                goToContent = true
+                            }) {
+                                Text("Skip")
                             }
                         }
-                        .scrollTargetLayout()
+                        
                     }
-                    .contentMargins(.horizontal, 20)
-                    .contentMargins(.vertical, 40)
-                    .scrollTargetBehavior(.paging)
-                    .scrollIndicators(.hidden)
-                    .scrollPosition(id: $scrollPosition)
-                    .onChange(of: scrollPosition) { _, newValue in
-                        if let newValue {
-                            currentIndex = newValue
-                        }
-                    }
-                    
-                    
-                    if currentIndex == features.count - 1 {
-
-                        Button {
-                            goToContent = true
-                        } label: {
-                            Text("GET STARTED")
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .frame(width: 220, height: 50)
-                                .background(appGreen)
-                                .clipShape(Capsule())
-                                
-                        }
-                        .padding(.bottom, 30)
-
-                    } else {
-
-                        Text("Swipe to explore")
-                            .font(.title2)
-                            .foregroundStyle(.secondary)
-                            
-                    }
-                    
                     
                 }
+                
             }
         }
+        
     }
+    
 }
 
 struct FeatureCardTest: View {

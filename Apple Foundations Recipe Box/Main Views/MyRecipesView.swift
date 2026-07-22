@@ -110,7 +110,7 @@ struct MyRecipesView: View {
                 }
                 .padding()
             }
-            .navigationTitle("Browse Recipes")
+            .navigationTitle("My Recipes")
             .searchable(
                 text: $searchText,
                 placement: .navigationBarDrawer(displayMode: .always),
