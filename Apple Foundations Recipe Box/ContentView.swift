@@ -11,6 +11,12 @@ struct ContentView: View {
     @State var recipeData = myRecipeData
     @State var tagData = myTagData
     
+    let appGreen = Color(
+        red: 0.05,
+        green: 0.56,
+        blue: 0.25
+    )
+    
     var body: some View {
         TabView {
             // Browse
@@ -55,6 +61,7 @@ struct ContentView: View {
             
             
         }
+        .tint(appGreen)
     }
 }
 
