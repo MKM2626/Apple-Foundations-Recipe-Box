@@ -236,7 +236,7 @@ struct AddRecipeViewTest: View {
                             }
                             .padding(.horizontal, 12)
                             .padding(.vertical, 8)
-                            .background(Color.orange.opacity(0.15))
+                            .background(appGreen.opacity(0.15))
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                         }
                     }
