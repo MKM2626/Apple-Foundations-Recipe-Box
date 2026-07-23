@@ -32,10 +32,16 @@ struct GroceryListPreview: View {
         ])
     ]
     
+    let appGreen = Color(
+        red: 0.05,
+        green: 0.56,
+        blue: 0.25
+    )
     
     var body: some View {
         
         ZStack {
+            appGreen.opacity(0.08).ignoresSafeArea()
             
             ScrollView {
                 
@@ -59,8 +65,8 @@ struct GroceryListPreview: View {
                                     Text(item)
                                 }
                             }
-                            Spacer()
-                            Divider()
+                            
+                            
                         }
                         .padding()
                         .frame(maxWidth: .infinity, alignment: .leading)

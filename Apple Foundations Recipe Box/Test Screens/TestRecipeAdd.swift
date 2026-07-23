@@ -52,6 +52,7 @@ struct AddRecipeViewTest: View {
                         PhotosPicker(
                             selection: $selectedPhoto,
                             matching: .images
+                            
                         ) {
                             if let imageData = selectedImageData,
                                let uiImage = UIImage(data: imageData) {
@@ -64,6 +65,7 @@ struct AddRecipeViewTest: View {
                                     .clipped()
                                     .clipShape(RoundedRectangle(cornerRadius: 20))
                                 
+                                
                             } else {
                                 VStack(spacing: 12) {
                                     Image(systemName: "photo")
@@ -75,7 +77,7 @@ struct AddRecipeViewTest: View {
                                 .foregroundColor(.secondary)
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 220)
-                                .background(Color(.systemGray6))
+                                
                                 .clipShape(RoundedRectangle(cornerRadius: 20))
                             }
                         }
@@ -86,7 +88,11 @@ struct AddRecipeViewTest: View {
                                 }
                             }
                         }
+                        
+                        
                     }
+                    
+                    
                     
                     
                     // Recipe Name
@@ -241,7 +247,7 @@ struct AddRecipeViewTest: View {
                         }
                 
             }
-            .background(Color(.systemGroupedBackground))
+            .background(appGreen.opacity(0.08))
             .navigationTitle("New Recipe")
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -295,7 +301,9 @@ struct AddRecipeViewTest: View {
                 }
             }
         }
+        
     }
+    
 }
 
 struct Card<Content: View>: View {

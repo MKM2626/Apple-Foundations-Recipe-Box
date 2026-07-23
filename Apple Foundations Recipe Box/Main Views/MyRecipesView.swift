@@ -18,6 +18,12 @@ struct MyRecipesView: View {
     private let columns = [
         GridItem(.adaptive(minimum: 140), spacing: 16)
     ]
+    
+    let appGreen = Color(
+        red: 0.05,
+        green: 0.56,
+        blue: 0.25
+    )
 
     // Search suggestions
     var tagSuggestion: [Tag] {
@@ -85,6 +91,7 @@ struct MyRecipesView: View {
                         }
                     }
                     .padding(.horizontal)
+                    
                 }
                 
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -111,6 +118,7 @@ struct MyRecipesView: View {
                 .padding()
             }
             .navigationTitle("My Recipes")
+            .background(appGreen.opacity(0.08))
             .searchable(
                 text: $searchText,
                 placement: .navigationBarDrawer(displayMode: .always),

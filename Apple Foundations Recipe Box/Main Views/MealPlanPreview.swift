@@ -27,6 +27,7 @@ struct MealPlanPreviewView: View {
     
     var body: some View {
         ZStack {
+            appGreen.opacity(0.08).ignoresSafeArea()
             
             VStack(alignment: .leading, spacing: 16) {
                 
@@ -71,10 +72,12 @@ struct MealPlanPreviewView: View {
                 
             }
             .padding()
-            
          
         }
+        
+        
     }
+    
 }
 
 #Preview {

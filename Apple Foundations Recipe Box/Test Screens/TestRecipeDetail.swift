@@ -114,7 +114,7 @@ struct RecipeDetailViewTest: View {
                     }
                 }
                 .padding()
-                .background(Color(.systemGroupedBackground))
+                .background(appGreen.opacity(0.08))
                 .clipShape(
                     RoundedRectangle(cornerRadius: 28)
                 )
